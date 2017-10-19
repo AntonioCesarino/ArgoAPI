@@ -68,6 +68,16 @@ class argoUser {
 			}
 		}
 	}	
+	public function isLogged() {
+		$header = array("x-auth-token: ".$this->authToken, "x-cod-min: ".$this->codMin, "x-prg-alunno: ".$this->prgAlunno, "x-prg-scheda: ".$this->prgScheda, "x-prg-scuola: ".$this->prgScuola);
+		$curl = $this->curl("compiti", $header);
+		if ($curl['httpcode']==200) {
+			return True;
+		}
+		else {
+			return False;
+		}
+	}
 	public function oggiScuola($datGiorno = datGiorno) {
 		$header = array("x-auth-token: ".$this->authToken, "x-cod-min: ".$this->codMin, "x-prg-alunno: ".$this->prgAlunno, "x-prg-scheda: ".$this->prgScheda, "x-prg-scuola: ".$this->prgScuola);
 		$query = array("datGiorno" => $datGiorno);
